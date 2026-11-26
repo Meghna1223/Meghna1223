@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meghna Parwani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: magazine-style single page. Lake teal and sunset ember pulled from her own photos. Photos carry the page, text stays short. */
+:root {
+  --bg: #F1F5F3;
+  --surface: #FFFFFF;
+  --ink: #0F2527;
+  --muted: #4D6466;
+  --line: #D5E0DD;
+  --accent: #C8321B;
+  --accent-ink: #FFFFFF;
+  --teal: #0E6B6B;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1819;
+    --surface: #122426;
+    --ink: #E9F1EF;
+    --muted: #9DB3B0;
+    --line: #244042;
+    --accent: #FF6B4A;
+    --accent-ink: #1A0A06;
+    --teal: #4FC3B8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1819;
+  --surface: #122426;
+  --ink: #E9F1EF;
+  --muted: #9DB3B0;
+  --line: #244042;
+  --accent: #FF6B4A;
+  --accent-ink: #1A0A06;
+  --teal: #4FC3B8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 5.4vw, 3.9rem); font-weight: 700; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+.kicker { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+
+/* header */
+.top { padding: 22px 0; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.mark { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+.top nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.95rem; }
+.top nav a { text-decoration: none; color: var(--muted); }
+.top nav a:hover { color: var(--accent); }
+
+/* hero */
+.hero { padding: 24px 0 56px; }
+.hero .wrap { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+.hero-text { display: flex; flex-direction: column; gap: 22px; max-width: 800px; }
+.hero-photo { position: relative; }
+.hero-photo img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 88%; border-radius: 6px; }
+.hero-photo figcaption { margin-top: 8px; font-size: 0.85rem; color: var(--muted); }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: 0.98rem; text-decoration: none; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { color: var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+
+/* facts */
+.facts { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.facts ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+.facts li { padding: 22px 20px 22px 0; display: flex; flex-direction: column; gap: 2px; }
+.facts li + li { padding-left: 20px; border-left: 1px solid var(--line); }
+.facts strong { font-family: var(--font-display); font-size: 1.7rem; line-height: 1.1; }
+.facts span { color: var(--muted); font-size: 0.92rem; }
+
+/* sections */
+section { padding: 72px 0 0; }
+.section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.card.travel { border-top: 4px solid var(--teal); }
+.card.pr { border-top: 4px solid var(--accent); }
+.card ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; color: var(--muted); }
+.bridge { margin-top: 20px; color: var(--muted); max-width: 70ch; }
+
+.project { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; align-items: start; }
+.project dl { margin: 0; display: grid; gap: 14px; }
+.project dt { font-weight: 700; }
+.project dd { margin: 0; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chips li { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 0.93rem; }
+.stack { display: flex; flex-direction: column; gap: 22px; margin-top: 8px; }
+.stack h3 { font-size: 1rem; margin-bottom: 10px; }
+
+/* galleries */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tile { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.tile .frame { aspect-ratio: 3 / 4; overflow: hidden; border-radius: 6px; background: var(--surface); }
+.tile img, .tile video { width: 100%; height: 100%; object-fit: cover; }
+.tile figcaption { font-size: 0.9rem; color: var(--muted); }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.about p + p { margin-top: 14px; }
+
+.contact { margin-top: 72px; padding: 56px 0; background: var(--surface); border-top: 1px solid var(--line); }
+.contact .wrap { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.contact p { color: var(--muted); max-width: 56ch; }
+footer { padding: 24px 0 40px; font-size: 0.88rem; color: var(--muted); }
+
+.intro-row { display: flex; align-items: center; gap: 16px; }
+.avatar { position: relative; width: 104px; height: 104px; flex: none; }
+.avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); }
+.avatar .star-a { position: absolute; top: -8px; right: -10px; width: 30px; height: 30px; }
+/* doodles: hand-drawn line icons, decorative only */
+.doodle { width: 56px; height: 56px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.d-accent { color: var(--accent); }
+.d-teal { color: var(--teal); }
+.rot-l { transform: rotate(-9deg); }
+.rot-r { transform: rotate(8deg); }
+.dash { stroke-dasharray: 1 9; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.section-head { position: relative; padding-right: 120px; }
+.head-doodle { position: absolute; right: 0; top: -4px; display: flex; align-items: flex-start; gap: 6px; }
+.head-doodle .doodle { width: 58px; height: 58px; }
+.card { position: relative; }
+.card .doodle.corner { position: absolute; top: 18px; right: 18px; width: 46px; height: 46px; }
+.hero-text .trail { width: 260px; height: 90px; margin-top: 4px; }
+.contact .wrap { position: relative; }
+.contact-doodles { position: absolute; right: 20px; top: 0; display: flex; align-items: flex-start; gap: 8px; }
+.contact-doodles .doodle { width: 64px; height: 64px; }
+
+@media (max-width: 860px) {
+  .section-head { padding-right: 84px; }
+  .head-doodle .doodle { width: 38px; height: 38px; }
+  .card .doodle.corner { width: 38px; height: 38px; top: 16px; right: 16px; }
+  .hero-text .trail { width: 210px; height: 73px; }
+  .contact-doodles .doodle { width: 42px; height: 42px; }
+}
+@media (max-width: 860px) {
+  .hero .wrap, .two, .project, .about { grid-template-columns: 1fr; }
+  .hero .wrap { gap: 32px; }
+  .hero-photo { order: -1; max-width: 460px; }
+  .hero-photo img { aspect-ratio: 4 / 3; }
+  .facts ul { grid-template-columns: 1fr 1fr; }
+  .facts li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .facts li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .card { padding: 22px; }
+}
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="d-suitcase" viewBox="0 0 64 64"><rect x="9" y="22" width="46" height="31" rx="5"/><path d="M24 22v-6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v6"/><path d="M22 22v31M42 22v31"/><circle cx="48" cy="37" r="3"/></symbol>
+  <symbol id="d-camera" viewBox="0 0 64 64"><rect x="7" y="21" width="50" height="31" rx="6"/><path d="M21 21l4-7h14l4 7"/><circle cx="32" cy="36" r="9"/><circle cx="32" cy="36" r="3"/><path d="M47 28h5"/></symbol>
+  <symbol id="d-cupcake" viewBox="0 0 64 64"><path d="M17 38l4 16h22l4-16"/><path d="M26 38l2 16M32 38v16M38 38l-2 16"/><path d="M13 38C11 30 18 27 22 25 21 16 32 12 38 18 44 20 52 26 51 38z"/><circle cx="33" cy="9" r="3.5"/></symbol>
+  <symbol id="d-notes" viewBox="0 0 64 64"><circle cx="19" cy="47" r="5"/><circle cx="43" cy="42" r="5"/><path d="M24 47V19l24-6v29"/><path d="M24 26l24-6"/></symbol>
+  <symbol id="d-book" viewBox="0 0 64 64"><path d="M32 19C25 13 15 13 8 17v31c7-4 17-4 24 2 7-6 17-6 24-2V17c-7-4-17-4-24 2z"/><path d="M32 19v31"/></symbol>
+  <symbol id="d-compass" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><path d="M32 6v4M32 54v4M6 32h4M54 32h4"/><path d="M42 22l-6 14-14 6 6-14z"/><circle cx="32" cy="32" r="1.5"/></symbol>
+  <symbol id="d-megaphone" viewBox="0 0 64 64"><path d="M10 27l28-11v32L10 37z"/><path d="M16 38l3 12h7l-2-10"/><path d="M44 24c5 4 5 12 0 16M50 19c8 7 8 19 0 26"/></symbol>
+  <symbol id="d-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><ellipse cx="32" cy="32" rx="10" ry="22"/><path d="M10 32h44M14 20h36M14 44h36"/></symbol>
+  <symbol id="d-star" viewBox="0 0 64 64"><path d="M32 6c1 16 8 25 26 26-18 1-25 10-26 26-1-16-8-25-26-26 18-1 25-10 26-26z"/></symbol>
+  <symbol id="d-heart" viewBox="0 0 64 64"><path d="M32 54C10 38 8 22 18 16c7-4 12 0 14 5 2-5 7-9 14-5 10 6 8 22-14 38z"/></symbol>
+  <symbol id="d-plane" viewBox="0 0 64 64"><path d="M6 30L58 8 44 54 31 37z"/><path d="M31 37L58 8"/><path d="M31 37l-3 12 8-8"/></symbol>
+  <symbol id="d-trail" viewBox="0 0 260 90"><path class="dash" d="M6 78C46 78 58 30 98 38s34 40 4 34-4-52 70-48c30 2 48 10 62 6"/><g transform="translate(214 6) scale(.6)"><path d="M6 30L58 8 44 54 31 37z"/><path d="M31 37L58 8"/><path d="M31 37l-3 12 8-8"/></g></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Meghna Parwani</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#lens">Photography</a>
+      <a href="#kitchen">Kitchen</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="intro-row">
+          <div class="avatar">
+            <img src="img/me-round.jpg" width="420" height="420" alt="Portrait of Meghna smiling, with curly hair and purple glasses">
+            <svg class="doodle star-a d-accent rot-r" viewBox="0 0 64 64" aria-hidden="true"><use href="#d-star" width="100%" height="100%"/></svg>
+          </div>
+          <p class="kicker">Travel · Marketing · PR · Bangalore</p>
+        </div>
+        <h1>I build journeys people remember, and I know how to tell their story.</h1>
+        <p class="lede">Ten years in travel, from luxury leisure to corporate programmes, and an MBA in Marketing and PR from XIBMS Bengaluru. I plan the trip, handle the details and write the words that sell it.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.linkedin.com/in/meghna-parwani-700120142" target="_blank" rel="noopener">Connect on LinkedIn</a>
+          <a class="btn ghost" href="#work">See my work</a>
+        </div>
+        <svg class="doodle trail d-teal" viewBox="0 0 260 90" aria-hidden="true"><use href="#d-trail" width="100%" height="100%"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <ul>
+        <li><strong>10 years</strong><span>in the travel industry</span></li>
+        <li><strong>250+</strong><span>Europe packages sold</span></li>
+        <li><strong>MBA</strong><span>Marketing and PR, XIBMS Bengaluru</span></li>
+        <li><strong>Amadeus</strong><span>and Galileo, hands-on</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">What I do</p>
+        <div class="head-doodle" aria-hidden="true">
+          <svg class="doodle d-accent rot-l" viewBox="0 0 64 64"><use href="#d-suitcase" width="100%" height="100%"/></svg>
+        </div>
+        <h2>Travel is the craft. Marketing and PR is where I'm taking it.</h2>
+      </div>
+      <div class="two">
+        <article class="card travel">
+          <h3>Travel</h3>
+          <svg class="doodle corner d-teal rot-r" viewBox="0 0 64 64" aria-hidden="true"><use href="#d-compass" width="100%" height="100%"/></svg>
+          <p>I started by selling Europe, and my first package was a Switzerland summer holiday for a family. Since then I have planned international leisure holidays, luxury journeys for high-net-worth clients, group bookings and corporate travel.</p>
+          <ul>
+            <li>Luxury and high-net-worth clients</li>
+            <li>Corporate travel, currently as a freelancer</li>
+            <li>Large group bookings and smaller events</li>
+            <li>Visa paperwork for client destinations</li>
+          </ul>
+        </article>
+        <article class="card pr">
+          <h3>Marketing and PR</h3>
+          <svg class="doodle corner d-accent rot-l" viewBox="0 0 64 64" aria-hidden="true"><use href="#d-megaphone" width="100%" height="100%"/></svg>
+          <p>I have marketed itineraries through company websites, written content for the companies I worked with, and promoted cruises to group travel clients while building long client relationships. My MBA (2022 to 2024) gives that work a framework.</p>
+          <ul>
+            <li>Itinerary and destination content</li>
+            <li>Cruise and group travel promotion</li>
+            <li>Client relationships and communication</li>
+            <li>Brand voice for travel businesses</li>
+          </ul>
+        </article>
+      </div>
+      <p class="bridge">The two sides use the same skill. I find out what a traveller really wants, then show it to them clearly enough that they say yes.</p>
+    </div>
+  </section>
+
+  <section id="project">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Selected project</p>
+        <div class="head-doodle" aria-hidden="true">
+          <svg class="doodle d-teal rot-r" viewBox="0 0 64 64"><use href="#d-globe" width="100%" height="100%"/></svg>
+        </div>
+        <h2>Launching Blueberry Travel's first online booking platform</h2>
+      </div>
+      <div class="project">
+        <p class="lede">At Book Your Voyage I was the first hire on the team and then its lead for a B2B and B2C platform that launched in Africa.</p>
+        <dl>
+          <div><dt>Built with the tech team and suppliers</dt><dd>I worked on the backend side and connected the platform to the suppliers behind it.</dd></div>
+          <div><dt>Tested every flow</dt><dd>Booking, reissue and cancellation, checked end to end before launch.</dd></div>
+          <div><dt>Onboarded and trained</dt><dd>I onboarded clients and trained the team that took the platform to clients in Africa.</dd></div>
+        </dl>
+      </div>
+      <div class="stack">
+        <div>
+          <h3>Companies</h3>
+          <ul class="chips">
+            <li>Coins Holidays</li>
+            <li>Odyssey Tours &amp; Travels</li>
+            <li>Book Your Voyage</li>
+            <li>Leonard Travels</li>
+            <li>Freelance corporate travel</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tools</h3>
+          <ul class="chips">
+            <li>Amadeus</li>
+            <li>Galileo</li>
+            <li>Expedia</li>
+            <li>Viator</li>
+            <li>Ottila</li>
+            <li>Red Apple</li>
+            <li>Tally</li>
+            <li>WinYatra</li>
+            <li>Excel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Photography</p>
+        <div class="head-doodle" aria-hidden="true">
+          <svg class="doodle d-accent rot-r" viewBox="0 0 64 64"><use href="#d-camera" width="100%" height="100%"/></svg>
+        </div>
+        <h2>Through my lens</h2>
+        <p class="lede">Frames from my own travels, in Singapore and in the lake country of Khao Sok, Thailand.</p>
+      </div>
+      <div class="grid">
+        <figure class="tile">
+          <div class="frame"><img src="img/me-cloud-forest.jpg" width="1183" height="1400" alt="Meghna in a red dress with arms open in front of the Cloud Forest waterfall at Gardens by the Bay, Singapore" loading="lazy"></div>
+          <figcaption>Cloud Forest, Gardens by the Bay, Singapore</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/supertrees.jpg" width="1050" height="1400" alt="Glowing red Supertrees seen from below at night, with a full moon between them" loading="lazy"></div>
+          <figcaption>Supertree Grove after dark, Singapore</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/kayaks.jpg" width="1050" height="1400" alt="Two red kayaks on turquoise water below forested limestone cliffs" loading="lazy"></div>
+          <figcaption>Kayaks on the lake, Khao Sok, Thailand</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/cloud-forest-frame.jpg" width="1067" height="1400" alt="Ferns and leaves framing a curved walkway under a glass dome, with mist rising" loading="lazy"></div>
+          <figcaption>Looking up through the Cloud Forest, Singapore</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/pier.jpg" width="1050" height="1400" alt="Long-tail boats moored at a floating wooden pier on a turquoise lake under a deep blue sky" loading="lazy"></div>
+          <figcaption>Boat pier, Khao Sok, Thailand</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame">
+            <video src="img/sunset.mp4" poster="img/sunset.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A deep red sun sinking into dark clouds over the sea"></video>
+          </div>
+          <figcaption>Sunset, still moving</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="kitchen">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Cooking and baking</p>
+        <div class="head-doodle" aria-hidden="true">
+          <svg class="doodle d-accent rot-l" viewBox="0 0 64 64"><use href="#d-cupcake" width="100%" height="100%"/></svg>
+        </div>
+        <h2>From my kitchen</h2>
+        <p class="lede">I cook, I bake, and I photograph what comes out.</p>
+      </div>
+      <div class="grid">
+        <figure class="tile">
+          <div class="frame"><img src="img/bao.jpg" width="1050" height="1400" alt="A homemade steamed bao bun held in one hand, filled with vegetables and a creamy orange sauce" loading="lazy"></div>
+          <figcaption>Homemade bao, filled and sauced</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/loaf.jpg" width="1050" height="1400" alt="A loaf cake in a glass dish topped with walnuts and chunks of dark chocolate" loading="lazy"></div>
+          <figcaption>Walnut and dark chocolate loaf</figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="frame"><img src="img/noodles.jpg" width="1050" height="1400" alt="A blue patterned bowl of creamy noodles topped with crushed peanuts and spring onion, with chopsticks and a candle" loading="lazy"></div>
+          <figcaption>Creamy peanut noodles by candlelight</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <div class="section-head" style="margin-bottom:0">
+          <p class="kicker">Beyond the desk</p>
+          <div class="head-doodle" aria-hidden="true">
+            <svg class="doodle d-teal rot-l" viewBox="0 0 64 64"><use href="#d-book" width="100%" height="100%"/></svg>
+            <svg class="doodle d-accent rot-r" viewBox="0 0 64 64"><use href="#d-notes" width="100%" height="100%"/></svg>
+          </div>
+          <h2>The things I do when I'm not planning trips</h2>
+        </div>
+        <div>
+          <p>I travel, take photographs, cook, bake, dance and read a lot.</p>
+          <p>They all feed the same instinct: noticing what makes an experience good, and sharing it with other people.</p>
+          <ul class="chips" style="margin-top:20px">
+            <li>Travel</li>
+            <li>Photography</li>
+            <li>Cooking</li>
+            <li>Baking</li>
+            <li>Dance</li>
+            <li>Reading</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-doodles" aria-hidden="true">
+      <svg class="doodle d-accent rot-r" viewBox="0 0 64 64"><use href="#d-plane" width="100%" height="100%"/></svg>
+      <svg class="doodle d-teal" viewBox="0 0 64 64"><use href="#d-star" width="100%" height="100%"/></svg>
+      <svg class="doodle d-accent rot-l" viewBox="0 0 64 64"><use href="#d-heart" width="100%" height="100%"/></svg>
+    </div>
+    <p class="kicker">Contact</p>
+    <h2>Let's talk</h2>
+    <p>I'm open to travel, marketing and PR roles, in Bangalore or remote. The quickest way to reach me is on LinkedIn.</p>
+    <a class="btn primary" href="https://www.linkedin.com/in/meghna-parwani-700120142" target="_blank" rel="noopener">Message me on LinkedIn</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">© 2026 Meghna Parwani · Bangalore, India</div>
+</footer>
+
+</body>
+</html>
